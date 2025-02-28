@@ -1,21 +1,21 @@
-// Función para obtener números de las entradas
+// Números de las entradas
 function obtenerNumeros() {
-    const num1 = parseFloat(document.querySelector(".number1").value);
-    const num2 = parseFloat(document.querySelector(".number2").value);
+    const num1 = document.querySelector(".number1").value;
+    const num2 = document.querySelector(".number2").value;
     return { num1, num2 };
 }
 
-// Función para mostrar el resultado
+// Mostrar el resultado
 function mostrarResultado(resultado) {
     document.getElementById("result").textContent = resultado;
 }
 
 // Validar input
 function validateInput(num) {
-    return !isNaN(num) && num !== '';
+    return !isNaN(num) && num.trim() !== ''; // Verificar que no sea NaN y que no esté vacío
 }
 
-// Calcular el resultado basado en la operación seleccionada
+// Calcular el resultado
 document.getElementById("calculate").addEventListener("click", () => {
     const { num1, num2 } = obtenerNumeros();
     const operation = document.getElementById("operation").value;
@@ -26,22 +26,26 @@ document.getElementById("calculate").addEventListener("click", () => {
         return;
     }
 
+    // Convertir a números después de la validación
+    const number1 = parseFloat(num1);
+    const number2 = parseFloat(num2);
+
     let resultado;
     switch (operation) {
         case 'add':
-            resultado = num1 + num2;
+            resultado = number1 + number2;
             break;
         case 'subtract':
-            resultado = num1 - num2;
+            resultado = number1 - number2;
             break;
         case 'multiply':
-            resultado = num1 * num2;
+            resultado = number1 * number2;
             break;
         case 'divide':
-            if (num2 === 0) {
+            if (number2 === 0) {
                 resultado = "Error: División por cero";
             } else {
-                resultado = num1 / num2;
+                resultado = number1 / number2;
             }
             break;
     }
